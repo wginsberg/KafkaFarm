@@ -19,6 +19,5 @@ def consume(value):
 
 if __name__ == "__main__":
     for msg in consumer:
-        print("message: {}".format(msg.value))
-        print("result: {}".format(consume(msg.value)))
+        print(consume(msg.value))
 

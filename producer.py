@@ -3,8 +3,7 @@
 from kafka import KafkaProducer
 import json
 
-producer = KafkaProducer(bootstrap_servers='localhost:9092',
-                         value_serializer=lambda v: json.dumps(v).encode('utf-8'))
+producer = KafkaProducer(value_serializer=lambda v: json.dumps(v).encode('utf-8'))
 
 producer.send("farm", {"f": "create", "a": {"id": 1, "name": "farm1"}})
 producer.send("farm", {"f": "get", "a": {"id": 1}})
