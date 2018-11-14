@@ -11,27 +11,26 @@ class TestCRUD(unittest.TestCase):
         self.fs = Farms()
 
     def test_create(self):
-        ret = self.fs.create()
-        self.assertIsInstance(ret, str)
+        ret = self.fs.create("123")
 
     def test_get(self):
-        idx = self.fs.create()
-        ret = self.fs.get(idx)
+        self.fs.create("123")
+        ret = self.fs.get("123")
         self.assertIsInstance(ret, Farm)
 
     def test_update(self):
-        idx = self.fs.create()
-        self.fs.update(idx, name="test", address="123", latitude=1, longitude=2)
-        ret = self.fs.get(idx)
+        self.fs.create("123")
+        self.fs.update("123", name="test", address="456", latitude=1, longitude=2)
+        ret = self.fs.get("123")
         self.assertEqual(ret.name, "test")
-        self.assertEqual(ret.address, "123")
+        self.assertEqual(ret.address, "456")
         self.assertEqual(ret.latitude, 1)
         self.assertEqual(ret.longitude, 2)
 
     def test_delete(self):
-        idx = self.fs.create()
-        self.fs.delete(idx)
-        self.assertEqual(self.fs.get(idx), None)
+        self.fs.create("123")
+        self.fs.delete("123")
+        self.assertEqual(self.fs.get("123"), None)
 
 if __name__ == '__main__':
     unittest.main()

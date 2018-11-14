@@ -7,8 +7,8 @@ class Farm:
     Single farm record
     '''
 
-    def __init__(self, idx=None, **kwargs):
-        self.id = idx
+    def __init__(self, id_, **kwargs):
+        self.id = id_
         self.update(**kwargs)
 
     def update(self, name=None, address=None, latitude=None, longitude=None):
@@ -25,17 +25,15 @@ class Farms:
     def __init__(self):
         self.all_farms = {}
 
-    def create(self, **kwargs):
-        idx = str(uuid.uuid4())
-        self.all_farms[idx] = Farm(**kwargs)
-        return idx
+    def create(self, id, **kwargs):
+        self.all_farms[id] = Farm(id, **kwargs)
 
-    def get(self, idx):
-        return self.all_farms.get(idx, None)
+    def get(self, id):
+        return self.all_farms.get(id, None)
 
-    def update(self, idx, **kwargs):
-        self.all_farms[idx].update(**kwargs)
+    def update(self, id, **kwargs):
+        self.all_farms[id].update(**kwargs)
 
-    def delete(self, idx):
-        del self.all_farms[idx]
+    def delete(self, id):
+        del self.all_farms[id]
 
